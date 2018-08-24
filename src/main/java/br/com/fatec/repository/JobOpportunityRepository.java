@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import br.com.fatec.model.JobOpportunity;
 import br.com.fatec.model.JobOpportunityStatus;
@@ -23,7 +22,7 @@ import br.com.fatec.model.JobOpportunityStatus;
  * @version 1.0 19/08/2018
  */
 public interface JobOpportunityRepository extends JpaRepository<JobOpportunity, Long> {
-	//   @Query("SELECT r FROM Role r WHERE LOWER(r.role) = LOWER(:role)")
+
 	@Query("SELECT jb from JobOpportunity jb where jb.status = ?1")
 	List<JobOpportunity> getByStatus(JobOpportunityStatus status);
 

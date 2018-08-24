@@ -18,9 +18,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * A classe {@link JobOpportunity}
@@ -59,8 +56,6 @@ public class JobOpportunity {
 	
 	@Column(name = "UPDATE_DATE")
 	private Date updateDate;
-	
-	private Boolean active;
 	
 	private Double salary;
 	
@@ -107,7 +102,7 @@ public class JobOpportunity {
 	 * @param status
 	 */
 	public JobOpportunity(long id, Company company, String location, String title, String activity, String requisites,
-			String details, Date limitDate, Boolean isPrivate, Date creationDate, Date updateDate, Boolean active,
+			String details, Date limitDate, Boolean isPrivate, Date creationDate, Date updateDate,
 			Double salary, JobOpportunityStatus status) {
 		super();
 		this.id = id;
@@ -121,7 +116,6 @@ public class JobOpportunity {
 		this.isPrivate = isPrivate;
 		this.creationDate = creationDate;
 		this.updateDate = updateDate;
-		this.active = active;
 		this.salary = salary;
 		this.status = status;
 	}
@@ -273,20 +267,6 @@ public class JobOpportunity {
 	}
 
 	/**
-	 * @return the active
-	 */
-	public Boolean getActive() {
-		return active;
-	}
-
-	/**
-	 * @param active the active to set
-	 */
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	/**
 	 * @return the salary
 	 */
 	public Double getSalary() {
@@ -302,6 +282,10 @@ public class JobOpportunity {
 	
 	public void delete(){
 		this.setStatus(JobOpportunityStatus.DELETED);
+	}
+	
+	public void undelete(JobOpportunityStatus status){
+		this.setStatus(status);
 	}
 	
 
