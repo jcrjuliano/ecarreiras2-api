@@ -19,6 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import br.com.fatec.enums.JobOpportunityStatus;
+
 /**
  * A classe {@link JobOpportunity}
  *

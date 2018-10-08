@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import br.com.fatec.model.JobOpportunity;
 import br.com.fatec.model.JobSubscription;
 import br.com.fatec.model.User;
-import br.com.fatec.repository.JobOpportunityRepository;
-import br.com.fatec.repository.JobSubscriptionRepository;
+import br.com.fatec.repositories.JobOpportunityRepository;
+import br.com.fatec.repositories.JobSubscriptionRepository;
 
 /**
  * A classe {@link JobSubscriptionDAO}

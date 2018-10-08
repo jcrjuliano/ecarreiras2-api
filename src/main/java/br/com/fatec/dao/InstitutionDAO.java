@@ -12,8 +12,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.fatec.exceptions.ObjectNotFoundException;
 import br.com.fatec.model.Institution;
-import br.com.fatec.repository.InstitutionRepository;
+import br.com.fatec.repositories.InstitutionRepository;
 
 /**
  * A classe {@link InstitutionDAO}
@@ -42,7 +43,12 @@ public class InstitutionDAO {
 	/* get institution by id */
 	
 	public Institution findOne(Long institutionId){
-		return institutionRepository.getOne(institutionId);
+		Institution inst = institutionRepository.getOne(institutionId);
+		if (inst == null){
+			throw new ObjectNotFoundException("Objeto não encontrado! Id:" + institutionId
+					+ ", Tipo: " + Institution.class.getName());
+		}
+		return inst;
 	}
 	
 	/* delete an institution */

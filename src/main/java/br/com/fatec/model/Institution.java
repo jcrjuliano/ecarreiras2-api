@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import br.com.fatec.enums.InstitutionLevel;
+
 
 /**
  * A classe {@link Institution}

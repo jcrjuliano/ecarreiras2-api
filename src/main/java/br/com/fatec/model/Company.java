@@ -9,12 +9,9 @@ package br.com.fatec.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.fatec.enums.Roles;
 
 /**
  * A classe {@link Company}
@@ -24,15 +21,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="company")
-public class Company {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
-	@OneToOne
-	@JoinColumn(name = "ID_USER")
-	private User user;
-	
+public class Company extends User{
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "COMPANY_NAME")
 	private String companyName;
 	
@@ -44,33 +35,24 @@ public class Company {
 	
 	@Column(name = "CONTACT_NAME")
 	private String contactName;
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
+	
+	public Company(){
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 * @param username
+	 * @param password
+	 * @param role
 	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(User user) {
-		this.user = user;
+	public Company(Long id, String username, String password, 
+			String companyName, String email, String phone, String contactName) {
+		super(id, username, password, Roles.COMPANY);
+		// TODO Auto-generated constructor stub
+		this.companyName = companyName;
+		this.email = email;
+		this.phone = phone;
+		this.contactName = contactName;
 	}
 
 	/**
@@ -129,27 +111,12 @@ public class Company {
 		this.contactName = contactName;
 	}
 
-	/**
-	 * @param id
-	 * @param user
-	 * @param companyName
-	 * @param email
-	 * @param phone
-	 * @param contactName
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public Company(long id, User user, String companyName, String email, String phone, String contactName) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.companyName = companyName;
-		this.email = email;
-		this.phone = phone;
-		this.contactName = contactName;
+	@Override
+	public String toString() {
+		return "Company [companyName=" + companyName + ", email=" + email + ", phone=" + phone + ", contactName="
+				+ contactName + "]";
 	}
-	
-	public Company(){
-		
-	}
-	
-
 }

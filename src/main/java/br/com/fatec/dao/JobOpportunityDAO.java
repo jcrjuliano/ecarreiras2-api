@@ -12,9 +12,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.fatec.enums.JobOpportunityStatus;
 import br.com.fatec.model.JobOpportunity;
-import br.com.fatec.model.JobOpportunityStatus;
-import br.com.fatec.repository.JobOpportunityRepository;
+import br.com.fatec.repositories.JobOpportunityRepository;
 
 /**
  * A classe {@link JobOpportunityDAO}

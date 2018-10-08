@@ -8,13 +8,12 @@
 package br.com.fatec.model;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import br.com.fatec.enums.Roles;
 
 /**
  * A classe {@link Mentor}
@@ -24,11 +23,56 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @Table(name="Mentor")
-@EntityListeners(AuditingEntityListener.class)
-public class Mentor {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+public class Mentor extends User{
+	private static final long serialVersionUID = 1L;
 	
+	@OneToOne
+	@JoinColumn(name="institution_id")
+	@MapsId
+	private Institution institution;
+	
+	private String name;
+	
+	public Mentor(){
+	}
 
+	/**
+	 * @param id
+	 * @param username
+	 * @param password
+	 * @param role
+	 */
+	public Mentor(Long id, String username, String password, Institution institution, String name) {
+		super(id, username, password, Roles.MENTOR);
+		this.institution = institution;
+		this.name = name;		
+	}
+
+	/**
+	 * @return the institution
+	 */
+	public Institution getInstitution() {
+		return institution;
+	}
+
+	/**
+	 * @param institution the institution to set
+	 */
+	public void setInstitution(Institution institution) {
+		this.institution = institution;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 }

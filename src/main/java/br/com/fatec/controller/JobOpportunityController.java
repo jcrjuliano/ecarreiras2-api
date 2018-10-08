@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatec.dao.JobOpportunityDAO;
+import br.com.fatec.enums.JobOpportunityStatus;
 import br.com.fatec.model.JobOpportunity;
-import br.com.fatec.model.JobOpportunityStatus;
 
 /**
  * A classe {@link JobOpportunityController}

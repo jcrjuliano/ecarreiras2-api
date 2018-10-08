@@ -7,16 +7,24 @@
 
 package br.com.fatec.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import br.com.fatec.enums.Roles;
 
 /**
  * A classe {@link User}
@@ -26,8 +34,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @Table(name="User")
-@EntityListeners(AuditingEntityListener.class)
-public class User {
+@Inheritance(strategy=InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+public abstract class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -36,17 +47,37 @@ public class User {
 	private String username;
 	
 	@Column(name="password")
+	@JsonIgnore
 	private String password;
 	
 	@Column(name="active")
 	private boolean active;
-	
 	@Enumerated
 	@Column(name="role", nullable=false)
 	private Roles role;
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@Column(name="creation_date", nullable=false)
+	private Date creationDate;
+	
 	public User(){
 		
+	}
+
+	/**
+	 * @param id
+	 * @param username
+	 * @param password
+	 * @param active
+	 * @param role
+	 */
+	public User(Long id, String username, String password, Roles role) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.active = true;
+		this.role = role;		
 	}
 
 	/**
@@ -107,6 +138,29 @@ public class User {
 
 	/**
 	 * @return the role
+	 
+	public Roles getRole() {
+		return Roles.toEnum(role);
+	}
+	*/
+
+	/**
+	 * @param role the role to set
+	
+	public void setRole(Roles role) {
+		this.role = role.getCod();
+	}
+	 */
+
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @return the role
 	 */
 	public Roles getRole() {
 		return role;
@@ -118,7 +172,48 @@ public class User {
 	public void setRole(Roles role) {
 		this.role = role;
 	}
-	
-	
 
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+	
+	public void disable(){
+		this.active = false;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
+	
 }

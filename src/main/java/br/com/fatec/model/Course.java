@@ -20,6 +20,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import br.com.fatec.enums.Period;
+
 
 
 /**
