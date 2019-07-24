@@ -23,7 +23,7 @@ import br.com.fatec.enums.Roles;
 @Entity
 @Table(name="Student")
 @JsonTypeName("student")
-public class Student extends User{
+public class Student extends Usuario{
 	private static final long serialVersionUID = 1L;
 	private String ra;
 	private String institutionCode;

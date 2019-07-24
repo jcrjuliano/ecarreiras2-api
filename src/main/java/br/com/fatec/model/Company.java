@@ -21,7 +21,7 @@ import br.com.fatec.enums.Roles;
  */
 @Entity
 @Table(name="company")
-public class Company extends User{
+public class Company extends Usuario{
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "COMPANY_NAME")

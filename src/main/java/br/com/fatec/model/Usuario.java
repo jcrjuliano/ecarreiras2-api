@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import br.com.fatec.enums.Roles;
 
 /**
- * A classe {@link User}
+ * A classe {@link Usuario}
  *
  * @author Julia
  * @version 1.0 13/08/2018
@@ -36,7 +36,7 @@ import br.com.fatec.enums.Roles;
 @Table(name="User")
 @Inheritance(strategy=InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-public abstract class User implements Serializable {
+public abstract class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -60,7 +60,7 @@ public abstract class User implements Serializable {
 	@Column(name="creation_date", nullable=false)
 	private Date creationDate;
 	
-	public User(){
+	public Usuario(){
 		
 	}
 
@@ -71,7 +71,7 @@ public abstract class User implements Serializable {
 	 * @param active
 	 * @param role
 	 */
-	public User(Long id, String username, String password, Roles role) {
+	public Usuario(Long id, String username, String password, Roles role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -206,7 +206,7 @@ public abstract class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Usuario other = (Usuario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

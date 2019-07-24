@@ -23,7 +23,7 @@ import br.com.fatec.enums.Roles;
  */
 @Entity
 @Table(name="Mentor")
-public class Mentor extends User{
+public class Mentor extends Usuario{
 	private static final long serialVersionUID = 1L;
 	
 	@OneToOne

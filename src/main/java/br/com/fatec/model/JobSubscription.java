@@ -37,7 +37,7 @@ public class JobSubscription {
 	@ManyToOne
 	@JoinColumn(name="ID_USER")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private User user;
+	private Usuario user;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_JOB_OPPORTUNITY")
@@ -53,7 +53,7 @@ public class JobSubscription {
 	 * @param jobOpportunity
 	 * @param creationDate
 	 */
-	public JobSubscription(Long id, User user, JobOpportunity jobOpportunity, Date creationDate) {
+	public JobSubscription(Long id, Usuario user, JobOpportunity jobOpportunity, Date creationDate) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -85,14 +85,14 @@ public class JobSubscription {
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 

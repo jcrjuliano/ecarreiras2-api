@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.fatec.model.JobOpportunity;
 import br.com.fatec.model.JobSubscription;
-import br.com.fatec.model.User;
+import br.com.fatec.model.Usuario;
 
 /**
  * A classe {@link JobSubscriptionRepository}
@@ -26,7 +26,7 @@ public interface JobSubscriptionRepository extends JpaRepository<JobSubscription
 	
 	//search by user
 	@Query("SELECT js from JobSubscription js where js.user = ?1")
-	List<JobSubscription> getByUser(User user);
+	List<JobSubscription> getByUser(Usuario user);
 	
 	//search by job opportunity
 	@Query("SELECT js from JobSubscription js where js.jobOpportunity = ?1")
@@ -34,5 +34,5 @@ public interface JobSubscriptionRepository extends JpaRepository<JobSubscription
 	
 	//search by user and job opportunity
 	@Query("SELECT js from JobSubscription js where js.user = ?1 and js.jobOpportunity = ?2")
-	List<JobSubscription> getByUserAndJobOpportunity(User user, JobOpportunity jobOpportunity);
+	List<JobSubscription> getByUserAndJobOpportunity(Usuario user, JobOpportunity jobOpportunity);
 }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.fatec.model.JobOpportunity;
 import br.com.fatec.model.JobSubscription;
-import br.com.fatec.model.User;
+import br.com.fatec.model.Usuario;
 import br.com.fatec.repositories.JobOpportunityRepository;
 import br.com.fatec.repositories.JobSubscriptionRepository;
 
@@ -51,7 +51,7 @@ public class JobSubscriptionDAO {
 	}
 	
 	//Search by User
-	public List<JobSubscription> getByUser(User user){
+	public List<JobSubscription> getByUser(Usuario user){
 		return jobSubcriptionRepository.getByUser(user);
 	}
 	
@@ -61,7 +61,7 @@ public class JobSubscriptionDAO {
 	}
 	
 	//Search by Job Opportunity and User
-	public List<JobSubscription> getByUserAndJobOpportunity(User user, JobOpportunity jobOpportunity){
+	public List<JobSubscription> getByUserAndJobOpportunity(Usuario user, JobOpportunity jobOpportunity){
 		return jobSubcriptionRepository.getByUserAndJobOpportunity(user, jobOpportunity);
 	}	
 	

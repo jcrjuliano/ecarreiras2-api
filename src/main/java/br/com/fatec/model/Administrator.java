@@ -18,7 +18,7 @@ import br.com.fatec.enums.Roles;
  * @version 1.0 24/09/2018
  */
 @Entity
-public class Administrator extends User {
+public class Administrator extends Usuario {
 	private static final long serialVersionUID = 1L;
 
 	/**

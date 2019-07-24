@@ -18,5 +18,6 @@ import br.com.fatec.model.Administrator;
  * @version 1.0 24/09/2018
  */
 public interface AdministratorRepository extends JpaRepository<Administrator, Long>{
+	
 
 }
