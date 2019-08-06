@@ -15,9 +15,9 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@Order(Ordered.HIGHEST_PRECEDENCE)
-public class CorsFilter implements Filter {
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class CustomCorsFilter implements Filter {
 	
 	private String originPermitida = "http://localhost:4200"; //TODO: configurar para produção / ambientes diferentes
 

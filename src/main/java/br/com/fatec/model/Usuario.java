@@ -16,13 +16,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import br.com.fatec.enums.Roles;
 
@@ -33,10 +30,10 @@ import br.com.fatec.enums.Roles;
  * @version 1.0 13/08/2018
  */
 @Entity
-@Table(name="User")
-@Inheritance(strategy=InheritanceType.JOINED)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-public abstract class Usuario implements Serializable {
+@Table(name="Usuario")
+//@Inheritance(strategy=InheritanceType.JOINED)
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -52,6 +49,7 @@ public abstract class Usuario implements Serializable {
 	
 	@Column(name="active")
 	private boolean active;
+	
 	@Enumerated
 	@Column(name="role", nullable=false)
 	private Roles role;

@@ -16,8 +16,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import br.com.fatec.enums.JobOpportunityStatus;
 
@@ -33,9 +31,9 @@ public class JobOpportunity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_COMPANY")
-	private Company company;
+	private String company;
+	
+	private String companyContact;
 	
 	private String location;
 	
@@ -87,28 +85,14 @@ public class JobOpportunity {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 * @param company
-	 * @param location
-	 * @param title
-	 * @param activity
-	 * @param requisites
-	 * @param details
-	 * @param limitDate
-	 * @param isPrivate
-	 * @param creationDate
-	 * @param updateDate
-	 * @param active
-	 * @param salary
-	 * @param status
-	 */
-	public JobOpportunity(long id, Company company, String location, String title, String activity, String requisites,
-			String details, Date limitDate, Boolean isPrivate, Date creationDate, Date updateDate,
-			Double salary, JobOpportunityStatus status) {
+	
+	public JobOpportunity(long id, String company, String companyContact, String location, String title,
+			String activity, String requisites, String details, Date limitDate, Boolean isPrivate, Date creationDate,
+			Date updateDate, Double salary, JobOpportunityStatus status) {
 		super();
 		this.id = id;
 		this.company = company;
+		this.companyContact = companyContact;
 		this.location = location;
 		this.title = title;
 		this.activity = activity;
@@ -128,20 +112,20 @@ public class JobOpportunity {
 		this.id = id;
 	}
 
-	/**
-	 * @return the company
-	 */
-	public Company getCompany() {
+	
+
+	public String getCompany() {
 		return company;
 	}
-
-	/**
-	 * @param company the company to set
-	 */
-	public void setCompany(Company company) {
+	public void setCompany(String company) {
 		this.company = company;
 	}
-
+	public String getCompanyContact() {
+		return companyContact;
+	}
+	public void setCompanyContact(String companyContact) {
+		this.companyContact = companyContact;
+	}
 	/**
 	 * @return the location
 	 */

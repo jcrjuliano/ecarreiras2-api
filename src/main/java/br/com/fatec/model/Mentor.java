@@ -7,13 +7,16 @@
 
 package br.com.fatec.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import br.com.fatec.enums.Roles;
 
 /**
  * A classe {@link Mentor}
@@ -23,30 +26,36 @@ import br.com.fatec.enums.Roles;
  */
 @Entity
 @Table(name="Mentor")
-public class Mentor extends Usuario{
+public class Mentor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@OneToOne
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
+	@ManyToOne
 	@JoinColumn(name="institution_id")
-	@MapsId
 	private Institution institution;
 	
 	private String name;
 	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private Usuario usuario;
+	
 	public Mentor(){
 	}
 
-	/**
-	 * @param id
-	 * @param username
-	 * @param password
-	 * @param role
-	 */
-	public Mentor(Long id, String username, String password, Institution institution, String name) {
-		super(id, username, password, Roles.MENTOR);
+	
+	
+	public Mentor(Institution institution, String name, Usuario usuario) {
+		super();
 		this.institution = institution;
-		this.name = name;		
+		this.name = name;
+		this.usuario = usuario;
 	}
+
+
 
 	/**
 	 * @return the institution
@@ -75,4 +84,17 @@ public class Mentor extends Usuario{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 }

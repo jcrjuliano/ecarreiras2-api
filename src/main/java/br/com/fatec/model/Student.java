@@ -7,12 +7,17 @@
 
 package br.com.fatec.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-
-import br.com.fatec.enums.Roles;
 
 /**
  * A classe {@link Student}
@@ -23,25 +28,36 @@ import br.com.fatec.enums.Roles;
 @Entity
 @Table(name="Student")
 @JsonTypeName("student")
-public class Student extends Usuario{
+public class Student implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
 	private String ra;
 	private String institutionCode;
 	private String courseCode;
 	private String startYear;
 	private String startSemester;
 	private String code;
+	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private Usuario usuario;
 
-	public Student(Long id, String username, String password, String ra) {
-		super(id, username, password, Roles.STUDENT);
+
+	public Student(String ra, String institutionCode, String courseCode, String startYear, String startSemester,
+			String code, Usuario usuario) {
+		super();
 		this.ra = ra;
-		this.institutionCode = ra.substring(0, 3);
-		this.courseCode = ra.substring(3, 6);
-		this.startYear = "20" + ra.substring(6, 8);
-		this.startSemester =ra.substring(8, 9);
-		this.code = ra.substring(ra.length() -4);
+		this.institutionCode = institutionCode;
+		this.courseCode = courseCode;
+		this.startYear = startYear;
+		this.startSemester = startSemester;
+		this.code = code;
+		this.usuario = usuario;
 	}
-
 	/**
 	 * @return the ra
 	 */
@@ -114,6 +130,34 @@ public class Student extends Usuario{
 	public void setCode(String code) {
 		this.code = code;
 	}
-		
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		return true;
+	}
 
 }
