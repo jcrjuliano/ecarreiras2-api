@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,26 +34,27 @@ import br.com.fatec.model.JobOpportunity;
  * @version 1.0 19/08/2018
  */
 @RestController
-@RequestMapping("/ecarreiras")
+@RequestMapping("/jobs")
 public class JobOpportunityController {
 	
 	@Autowired
 	JobOpportunityDAO jobOpportunityDAO;
 	
 	// save job
-	@PostMapping("/jobs")
+	@PostMapping
 	public JobOpportunity createJobOpportunity(@Valid @RequestBody JobOpportunity job){
 		return jobOpportunityDAO.save(job); 
 	}
 	
 	/* find all jobs */
-	@GetMapping("/jobs")
+	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<JobOpportunity> getAllJobs(){
 		return jobOpportunityDAO.findAll();
 	}
 	
 	/* Find JobOpportunity by id*/
-	@GetMapping("/jobs/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<JobOpportunity> getJobOpportunityById(@PathVariable(value="id") Long jobId){
 		JobOpportunity jobOpportunity = jobOpportunityDAO.findOne(jobId);
 		if(jobOpportunity == null){
@@ -63,7 +65,7 @@ public class JobOpportunityController {
 	
 	/* Delete JobOpportunity */
 	@CrossOrigin
-	@DeleteMapping("/jobs/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<JobOpportunity> deleteJobOpportunity(@PathVariable(value="id") Long jobId){
 		JobOpportunity jobOpportunity = jobOpportunityDAO.findOne(jobId);
 		if(jobOpportunity == null){
@@ -77,7 +79,7 @@ public class JobOpportunityController {
 	}
 	
 	// Get JobOpportunity By Status
-	@GetMapping("/jobs/status/{status}")
+	@GetMapping("/status/{status}")
 	public List<JobOpportunity> getByStatus(@PathVariable(value="status") JobOpportunityStatus status){
 		return jobOpportunityDAO.getByStatus(status);
 		

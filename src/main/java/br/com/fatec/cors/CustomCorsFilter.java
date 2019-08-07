@@ -23,25 +23,25 @@ public class CustomCorsFilter implements Filter {
 
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
 		
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) resp;
 		
-		resp.setHeader("Access-Control-Allow-Origin", originPermitida);
-		resp.setHeader("Access-Control-Allow-Credentials", "true");
+		response.setHeader("Access-Control-Allow-Origin", originPermitida);
+        response.setHeader("Access-Control-Allow-Credentials", "true");
 		
-		if("OPTIONS".equals(req.getMethod()) 
-				&& originPermitida.equals(req.getHeader("Origin"))) {
-			resp.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
-			resp.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
-			resp.setHeader("Access-Control-Max-Age", "3600");
+		if("OPTIONS".equals(request.getMethod()) 
+				&& originPermitida.equals(request.getHeader("Origin"))) {
+			response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
+        	response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
+        	response.setHeader("Access-Control-Max-Age", "3600");
 			
-			resp.setStatus(HttpServletResponse.SC_OK);
+			response.setStatus(HttpServletResponse.SC_OK);
 			
 		} else {
-			chain.doFilter(request, response);
+			chain.doFilter(req, resp);
 		}
 		
 	}
